@@ -1,35 +1,27 @@
-#Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
+# Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
 # determine if the input string is valid.
 
-#An input string is valid if:
+# An input string is valid if:
 
-#Open brackets must be closed by the same type of brackets.
-#Open brackets must be closed in the correct order.
+# Open brackets must be closed by the same type of brackets.
+# Open brackets must be closed in the correct order.
 # #Every close bracket has a corresponding open bracket of the same type.
 
-chars = {
-    '(' : {
-        'open' : True,
-        'close' : ')'
-    },
-    '{' : {
-        'open' : True,
-        'close' : '}'
-    },
-    '[' : {
-        'open' : True,
-        'close' : ']'
-    }
-}
 
 def is_valid(s: str) -> bool:
-    for i in range(len(s) - 1) :
-        if s[i] == '(' and s[i + 1] == ')':
-            continue
-        elif s[i] == '[' and s[i + 1] == ']':
-            continue
-        elif s[i] == '{' and s[i + 1] == '}':
-            continue
+    openers = ["(", "[", "{"]
+    closers = [")", "]", "}"]
+    stack = []
+    for char in s:
+        if char in openers:
+            stack.append(char)
         else:
-            return False
-    return True
+            if not stack:
+                return False
+            if stack[-1] != openers[closers.index(char)]:
+                return False
+            stack.pop(-1)
+    return not stack
+
+
+print(is_valid("()[]{}"))
