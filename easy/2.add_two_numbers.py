@@ -11,15 +11,8 @@
 #Explanation: 342 + 465 = 807.
 
 def add_two_numbers(l1 : list[int], l2 : list[int]):
-    list1 = []
-    l1.reverse()
-    for num in l1:
-        list1.append(f'{num}')
-
-    l2.reverse()
-    list2 = []
-    for num in l2:
-        list2.append(f'{num}')
+    list1 = [str(num) for num in reversed(l1)]
+    list2 = [str(num) for num in reversed(l2)]
 
     addition = int(''.join(list1)) + int(''.join(list2))
     return [f'{num}' for num in str(addition)][::-1]
